@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>csl</groupId>
+  <artifactId>dataproclib</artifactId>
+  <versioning>
+    <versions>
+      <version>1.6-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20200512132703</lastUpdated>
+  </versioning>
+</metadata>

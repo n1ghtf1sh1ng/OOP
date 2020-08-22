@@ -1,0 +1,62 @@
+<html>
+<h1>project oop</h1>
+<p>
+
+</p>
+<p>
+This is the project for exercising the lecture *object-oriented programming*.
+The project is a code base in the Java programming language and
+contains several basic classes as example programs of OOP.
+Those classes are declared in files located in the subdirectory `src/main/java/`.
+
+</p>
+<p>
+To build the code of the project,
+you will needs to execute the following command after
+installing [Apache Maven](https://maven.apache.org).
+
+</p>
+<p>
+mvn package
+
+</p>
+<p>
+The command will produce the `oop-1.0-SNAPSHOT.jar` file in the `target` directory,
+which contains compiled code of the classes.
+
+</p>
+<p>
+
+</p>
+<p>
+For example, you can execute program with the jar, like the following command
+
+</p>
+<p>
+    java -cp target/oop-1.0-SNAPSHOT.jar oop.nonmod.markdown.NonModMarkdown readme.md readme.html
+
+</p>
+<p>
+
+</p>
+<p>
+This will execute the class from the file `src/main/java/oop/markdown/nonmod/Markdown.java`
+and takes 2 arguments `readme.md` and `readme.html`.
+The `Markdown` class reads the file specified as the first argument
+and converts it to the file specified as the second argument.
+
+</p>
+<p>
+The project currently contains the following programs
+
+</p>
+<ul>
+<li>`oop.drawing.*` : drawing figure apps</li>
+<li>`oop.markdown.*`: simplified markdown processor</li>
+<li>`oop.sprite.*`  : tiny sprite example</li>
+<li>`oop.stack.*`   : stack example</li>
+</ul>
+<p>
+
+</p>
+</html>
