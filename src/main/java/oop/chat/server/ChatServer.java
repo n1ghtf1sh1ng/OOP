@@ -46,7 +46,7 @@ public class ChatServer {
 			}
 			server = HttpServer.create(new InetSocketAddress(host, port), 0);
 
-			joinContext = server.createContext("/join", (HttpHandler) this);
+			joinContext = server.createContext("/join", new ServerHandlerJoin(this));
 			leaveContext = server.createContext("/leave", (HttpHandler) this);
 			retrieveContext = server.createContext("/retrieve", (HttpHandler) this);
 			postContext = server.createContext("/post", (HttpHandler) this);
@@ -77,7 +77,6 @@ public class ChatServer {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public JsonObject getInputJson(HttpExchange exchange) throws IOException {
 		String inData = StandardCharsets.UTF_8.decode(
 				ByteBuffer.wrap(exchange.getRequestBody().readAllBytes()))
@@ -232,8 +231,7 @@ public class ChatServer {
 				String id = input.getString("id");
 				ChatUser foundUser = null;
 				synchronized (this) {
-					for (int i = 0; i < users.size(); ++i) {
-						ChatUser user = users.get(i);
+					for (ChatUser user : users) {
 						if (user.getId().toString().equals(id)) {
 							foundUser = user;
 							break;
@@ -358,5 +356,32 @@ public class ChatServer {
 		System.err.println(str2);
 		app.addMessage(str2);
 	}
-
+  public ChatUser findUser(JsonObject input) {
+	  String name = input.getString("name");
+		ChatUser foundUser = null;
+	  synchronized (this) {
+		  for (ChatUser user : users) {
+			  if (user.getName().equals(name)) {
+				  foundUser = user;
+				  break;
+			  }
+		  }
+	  }
+		return foundUser;
+	}
+	public ChatUser createUser(ChatUser foundUser, String name, InetAddress address) {
+		ChatUser createdUser;
+		if (foundUser == null) {
+			synchronized (this) {
+				createdUser = new ChatUser(name, address, OffsetDateTime.now(), serverClock,
+						UUID.randomUUID());
+				users.add(createdUser);
+				log("user created: user=(%s,%s), addr=%s", name, createdUser.getId().toString(), address);
+				// app.updateUsers(users);
+			}
+		} else {
+			createdUser = null;
+		}
+		return createdUser;
+	}
 }
