@@ -20,7 +20,9 @@ public class ServerHandlerJoin implements HttpHandler {
 	}
 
 	@Override
-	public void handle(HttpExchange exchange) throws IOException {
+	public void handle(HttpExchange exchange) throws IOException { }
+
+	public void handleImpl(HttpExchange exchange) throws IOException {
 		String path = exchange.getHttpContext().getPath();
 		if ("/join".equals(path)) {
 			JsonObject input = getInputJson(exchange);
