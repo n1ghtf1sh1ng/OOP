@@ -13,10 +13,9 @@ import java.util.UUID;
 import oop.chat.core.ChatMessage;
 import oop.chat.core.ChatUser;
 import oop.chat.core.JsonObject;
-import oop.nonmod.chat.NonModChatServerApp;
 
 public class ChatServer {
-	public NonModChatServerApp app;
+	public ChatServerApp app;
 	public HttpServer server;
 	public HttpContext joinContext;
 	public HttpContext leaveContext;
@@ -27,7 +26,7 @@ public class ChatServer {
 	private List<ChatMessage> timeline = new ArrayList<>();
 	private long serverClock;
 
-	public ChatServer(NonModChatServerApp app) {
+	public ChatServer(ChatServerApp app) {
 		this.app = app;
 	}
 
